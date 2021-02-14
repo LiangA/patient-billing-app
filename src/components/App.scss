@@ -1,0 +1,69 @@
+// 1. View Appointment
+.view-appointment {
+  .search-bar {
+    width: 100%;
+    height: 70px;
+    border: 1px solid red;
+  }
+
+  .list {
+    width: 100%;
+    height: 300px;
+    border: 1px solid blue;
+  }
+}
+
+// 2. Add Patient Billing
+.add-patient-billing {
+  .patient-details {
+    width: 100%;
+    height: 500px;
+    border: 2px solid red;
+  }
+
+  .medical-scan-details {
+    width: 100%;
+    border: 2px solid blue;
+
+    .search-bar {
+      width: 100%;
+      height: 70px;
+      border: 1px solid green;
+    }
+
+    .list {
+      width: 100%;
+      height: 300px;
+      border: 1px solid orange;
+    }
+  }
+}
+
+// 3. Patient Billing Transaction
+.patient-billing-transaction {
+  .content {
+    display: flex;
+
+    .left {
+      flex-grow: 1;
+      border: 1px solid red;
+
+      .billing-status {
+        width: 100%;
+        height: 300px;
+        border: 1px solid red;
+      }
+
+      .card {
+        width: 100%;
+        height: 300px;
+        border: 1px solid red;
+      }
+    }
+
+    .right {
+      flex-grow: 1;
+      border: 1px solid blue;
+    }
+  }
+}
