@@ -7,6 +7,7 @@ import MedicalScanSearch from './MedicalScanSearch';
 const AddPatientAppointment = () => {
   return (
     <div className="add-patient-appointment">
+      <Link to="/">Back to View Appointment</Link>
       <div className="patient-details">
         <h1>Patient Details</h1>
       </div>
@@ -17,9 +18,7 @@ const AddPatientAppointment = () => {
         <MedicalScanTable />
       </div>
 
-      <Link to="/">Save</Link>
-      <br />
-      <Link to="/">Cancel</Link>
+      <button>Save</button>
     </div>
   );
 };
