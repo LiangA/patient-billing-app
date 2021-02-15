@@ -33,7 +33,7 @@ const PatientBilling = () => {
 
         <div className="right">
           <div className="transaction-history">
-            <h3>Previoud Transaction</h3>
+            <h3>Previoud Transaction:</h3>
             <TransactionTable paymentList={appointment.paymentList} />
           </div>
         </div>

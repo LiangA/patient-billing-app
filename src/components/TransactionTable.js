@@ -11,7 +11,7 @@ const TransactionTable = ({ paymentList }) => {
     <table className="transaction-table">
       <thead>
         <tr>
-          <th>no</th>
+          <th>No.</th>
           <th>Date</th>
           <th>Paid Amount</th>
           <th>Payment mode</th>

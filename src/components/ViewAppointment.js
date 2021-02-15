@@ -7,7 +7,7 @@ const ViewAppointment = () => {
   return (
     <div className="view-appointment">
       <h1>View Appointment</h1>
-      <Link to="/add">add patient billing</Link>
+      <Link to="/add">New Appointment</Link>
       <div className="search-bar">appointment search bar</div>
       <AppointmentTable />
     </div>

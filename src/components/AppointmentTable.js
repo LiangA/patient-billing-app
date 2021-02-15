@@ -3,8 +3,6 @@ import { Link } from 'react-router-dom';
 
 const AppointmentTable = () => {
   const appointment = useSelector((s) => s.appointment);
-  console.log(appointment);
-
   if (appointment.isLoading) {
     return <div>Loading...</div>;
   }

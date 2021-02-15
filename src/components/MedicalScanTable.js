@@ -18,7 +18,7 @@ const MedicalScanTable = () => {
     <table className="medical-scan-table">
       <thead>
         <tr>
-          <th>Sno</th>
+          <th>No.</th>
           <th>Scan Name</th>
           <th>Scan Amount</th>
           <th>Discount</th>
