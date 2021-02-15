@@ -17,7 +17,7 @@ const App = () => {
           <AddPatientAppointment />
         </Route>
 
-        <Route path="/transaction">
+        <Route path="/transaction/:appointmentId">
           <PatientBillingTransaction />
         </Route>
 

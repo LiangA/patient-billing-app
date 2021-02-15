@@ -1,6 +1,11 @@
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const PatientBillingTransaction = () => {
+  const { appointmentId } = useParams();
+  const appointment = useSelector((s) => s.appointment.map[appointmentId]);
+  console.log({ appointment });
+
   return (
     <div className="patient-billing-transaction">
       <Link to="/">Back to View Appointment</Link>
