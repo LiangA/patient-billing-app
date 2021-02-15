@@ -5,8 +5,11 @@ import { Redirect, Route, Switch } from 'react-router-dom';
 import AddPatientBilling from './AddPatientBilling';
 import PatientBillingTransaction from './PatientBillingTransaction';
 import ViewAppointment from './ViewAppointment';
+import useInitApp from '../hooks/useInitApp';
 
 const App = () => {
+  useInitApp();
+
   return (
     <div id="patient-billing-app">
       <Switch>

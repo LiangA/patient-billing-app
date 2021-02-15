@@ -4,7 +4,7 @@ const defaultState = {
   data: {
     medicalBilling: {
       list: [],
-      isLoading: false,
+      isLoading: true,
     },
   },
 };
