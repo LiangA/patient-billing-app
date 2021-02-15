@@ -1,14 +1,14 @@
-const TransactionHistory = ({ paymentList }) => {
+const TransactionTable = ({ paymentList }) => {
   if (paymentList.length === 0) {
     return (
-      <div className="patient-billing-transaction-table">
+      <div className="transaction-table">
         <div className="empty">No Transaction</div>
       </div>
     );
   }
 
   return (
-    <table className="patient-billing-transaction-table">
+    <table className="transaction-table">
       <thead>
         <tr>
           <th>no</th>
@@ -33,4 +33,4 @@ const TransactionHistory = ({ paymentList }) => {
   );
 };
 
-export default TransactionHistory;
+export default TransactionTable;

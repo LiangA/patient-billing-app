@@ -1,4 +1,4 @@
-import './PatientBillingTransaction.scss';
+import './PatientBilling.scss';
 
 import { Link, useParams } from 'react-router-dom';
 
@@ -6,7 +6,7 @@ import BillingStatus from './BillingStatus';
 import TransactionTable from './TransactionTable';
 import { useSelector } from 'react-redux';
 
-const PatientBillingTransaction = () => {
+const PatientBilling = () => {
   const { appointmentId } = useParams();
   const isLoading = useSelector((s) => s.appointment.isLoading);
   const appointment = useSelector((s) => s.appointment.map[appointmentId]);
@@ -16,7 +16,7 @@ const PatientBillingTransaction = () => {
   }
 
   return (
-    <div className="patient-billing-transaction">
+    <div className="patient-billing">
       <Link to="/">Back to View Appointment</Link>
       <h1>Patient Billing</h1>
 
@@ -42,4 +42,4 @@ const PatientBillingTransaction = () => {
   );
 };
 
-export default PatientBillingTransaction;
+export default PatientBilling;

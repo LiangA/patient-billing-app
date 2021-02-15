@@ -1,5 +1,4 @@
-// 3. Patient Billing Transaction
-.patient-billing-transaction {
+.patient-billing {
   .content {
     display: flex;
 
@@ -39,7 +38,7 @@
       margin-left: 20px;
       flex-grow: 1;
 
-      .patient-billing-transaction-table {
+      .transaction-table {
         width: 100%;
         margin: 25px 0;
         border-collapse: collapse;

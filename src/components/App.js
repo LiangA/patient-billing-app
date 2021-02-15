@@ -1,7 +1,7 @@
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import AddPatientAppointment from './AddPatientAppointment';
-import PatientBillingTransaction from './PatientBillingTransaction';
+import PatientBilling from './PatientBilling';
 import ViewAppointment from './ViewAppointment';
 import useInitApp from '../hooks/useInitApp';
 
@@ -16,7 +16,7 @@ const App = () => {
         </Route>
 
         <Route path="/transaction/:appointmentId">
-          <PatientBillingTransaction />
+          <PatientBilling />
         </Route>
 
         <Route exact path="/">
