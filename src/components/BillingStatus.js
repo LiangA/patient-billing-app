@@ -1,4 +1,11 @@
 const BillingStatus = ({ appointment }) => {
+  const { medicalScanList, paymentList } = appointment;
+
+  const totalAmount = medicalScanList.reduce((sum, scan) => sum + scan.amount, 0);
+  const totalDiscount = medicalScanList.reduce((sum, scan) => sum + scan.discount, 0);
+  const totalPaidAmount = paymentList.reduce((sum, { paidAmount }) => sum + paidAmount, 0);
+  const totoalBalance = totalAmount - totalDiscount - totalPaidAmount;
+
   return (
     <div className="billing-status">
       <h3>Current Billing Status:</h3>
@@ -20,19 +27,19 @@ const BillingStatus = ({ appointment }) => {
           </tr>
           <tr>
             <th>Total Amount</th>
-            <td>0</td>
+            <td>{totalAmount} INR</td>
           </tr>
           <tr>
             <th>Discount</th>
-            <td>0</td>
+            <td>{totalDiscount} INR</td>
           </tr>
           <tr>
             <th>Paid Amount</th>
-            <td>0</td>
+            <td>{totalPaidAmount} INR</td>
           </tr>
           <tr>
             <th>Balance</th>
-            <td>0</td>
+            <td>{totoalBalance} INR</td>
           </tr>
         </tbody>
       </table>

@@ -43,8 +43,8 @@ const db = {
         address: '311 Arsenal St, Watertown, MA 02472',
       },
       medicalScanList: [
-        { name: 'MRI BRAIN', amount: 3000, discount: 300 },
-        { name: 'GLUCOSE FASTING', amount: 130, discount: 13 },
+        { name: 'GLUCOSE FASTING', amount: 300, discount: 10 },
+        { name: 'MRI BRAIN', amount: 70, discount: 0 },
       ],
       paymentList: [
         {
