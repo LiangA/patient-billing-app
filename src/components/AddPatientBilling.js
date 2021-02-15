@@ -2,7 +2,7 @@ import './AddPatientBilling.scss';
 
 import { Link } from 'react-router-dom';
 import MedicalScanTable from './MedicalScanTable';
-import PatientBillingSearchBar from './PatientBillingSearchBar';
+import MedicalScanSearch from './MedicalScanSearch';
 
 const AddPatientBilling = () => {
   return (
@@ -13,7 +13,7 @@ const AddPatientBilling = () => {
 
       <div className="medical-scan-details">
         <h1>Medical Scan Details</h1>
-        <PatientBillingSearchBar />
+        <MedicalScanSearch />
         <MedicalScanTable />
       </div>
 

@@ -1,16 +1,15 @@
 import {
-  selectMedicalBilling,
-  setMedicalBillingDiscount,
-  pushPatientBillingScan,
+  selectMedicalScan,
+  setMedicalScanDiscount,
+  pushMedicalScan,
 } from '../store/actionCreators';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Select from 'react-select';
 
-const PatientBillingSearchBar = () => {
+const MedicalScanSearch = () => {
   const dispatch = useDispatch();
-  const medicalBilling = useSelector((s) => s.data.medicalBilling);
-  const ui = useSelector((s) => s.ui.medicalScanDetails);
+  const medicalScan = useSelector((s) => s.medicalScan);
 
   return (
     <div className="medical-scan-details-search-bar">
@@ -18,41 +17,41 @@ const PatientBillingSearchBar = () => {
         <span className="label">Scan List</span>
         <Select
           className="select"
-          isLoading={medicalBilling.isLoading}
+          isLoading={medicalScan.options.isLoading}
           isSearchable={true}
           components={{ DropdownIndicator: null }}
-          options={medicalBilling.list.map((mb) => ({
+          options={medicalScan.options.list.map((mb) => ({
             label: mb.name,
             value: mb.name,
           }))}
-          onChange={({ value }) => dispatch(selectMedicalBilling(value))}
+          onChange={({ value }) => dispatch(selectMedicalScan(value))}
         />
       </div>
 
       <div>
         <span className="label">Scan Amount</span>
-        <span>{ui.selectedMedicalBilling.amount || 0}</span>
+        <span>{medicalScan.select.amount || 0}</span>
       </div>
 
       <div className="discount">
         <span className="label">Discount</span>
         <input
           type="number"
-          disabled={medicalBilling.isLoading}
+          disabled={medicalScan.options.isLoading}
           min="0"
-          max={ui.selectedMedicalBilling.maxDiscount || 0}
-          value={ui.discount || 0}
+          max={medicalScan.select.maxDiscount || 0}
+          value={medicalScan.discount || 0}
           onChange={(e) => {
             const discount = Number.parseInt(e.target.value, 10);
-            dispatch(setMedicalBillingDiscount(discount));
+            dispatch(setMedicalScanDiscount(discount));
           }}
         />
       </div>
 
       <button
         className="add-button"
-        disabled={medicalBilling.isLoading}
-        onClick={() => dispatch(pushPatientBillingScan())}
+        disabled={medicalScan.options.isLoading}
+        onClick={() => dispatch(pushMedicalScan())}
       >
         Add
       </button>
@@ -60,4 +59,4 @@ const PatientBillingSearchBar = () => {
   );
 };
 
-export default PatientBillingSearchBar;
+export default MedicalScanSearch;

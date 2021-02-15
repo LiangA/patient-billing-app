@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { deletePatientBillingScan } from '../store/actionCreators';
+import { deleteMedicalScan } from '../store/actionCreators';
 
 const MedicalScanTable = () => {
   const dispatch = useDispatch();
-  const scanList = useSelector((s) => s.ui.medicalScanDetails.scanList);
+  const scanList = useSelector((s) => s.medicalScan.scanList);
 
   if (scanList.length === 0) {
     return (
@@ -35,7 +35,7 @@ const MedicalScanTable = () => {
             <td>{mb.discount}</td>
             <td>{mb.amount - mb.discount}</td>
             <td>
-              <button onClick={() => dispatch(deletePatientBillingScan(index))}>Delete</button>
+              <button onClick={() => dispatch(deleteMedicalScan(index))}>Delete</button>
             </td>
           </tr>
         ))}

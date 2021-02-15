@@ -1,38 +1,33 @@
 import produce from 'immer';
 
 const defaultState = {
-  data: {
-    medicalBilling: {
+  medicalScan: {
+    options: {
       isLoading: true,
       list: [],
       map: {},
     },
-  },
-
-  ui: {
-    medicalScanDetails: {
-      selectedMedicalBilling: {},
-      discount: 0,
-      scanList: [],
-    },
+    select: {},
+    discount: 0,
+    scanList: [],
   },
 };
 
 const appReducer = produce((draft, action) => {
   switch (action.type) {
-    case 'LOADING_MEDICAL_BILLING_LIST':
-      draft.data.medicalBilling.isLoading = true;
-      draft.data.medicalBilling.list = [];
-      draft.data.medicalBilling.map = {};
+    case 'LOADING_MEDICAL_SCAN_OPTIONS':
+      draft.medicalScan.options.isLoading = true;
+      draft.medicalScan.options.list = [];
+      draft.medicalScan.options.map = {};
       break;
 
-    case 'LOADED_MEDICAL_BILLING_LIST': {
-      const list = action.list.map((mb) => ({
-        name: mb.name,
-        amount: mb.amount,
-        maxDiscount: mb.discountType === '%' ? (mb.amount * mb.maxDiscount) / 100 : mb.maxDiscount,
-        discountType: mb.discountType,
-        modality: mb.modality,
+    case 'LOADED_MEDICAL_SCAN_OPTIONS': {
+      const list = action.list.map((ms) => ({
+        name: ms.name,
+        amount: ms.amount,
+        maxDiscount: ms.discountType === '%' ? (ms.amount * ms.maxDiscount) / 100 : ms.maxDiscount,
+        discountType: ms.discountType,
+        modality: ms.modality,
       }));
 
       const map = {};
@@ -40,55 +35,54 @@ const appReducer = produce((draft, action) => {
         map[item.name] = item;
       }
 
-      draft.data.medicalBilling.isLoading = false;
-      draft.data.medicalBilling.list = list;
-      draft.data.medicalBilling.map = map;
+      draft.medicalScan.options.isLoading = false;
+      draft.medicalScan.options.list = list;
+      draft.medicalScan.options.map = map;
       break;
     }
 
-    case 'SELECT_MEDICAL_BILLING': {
-      draft.ui.medicalScanDetails.selectedMedicalBilling =
-        draft.data.medicalBilling.map[action.name];
+    case 'SELECT_MEDICAL_SCAN': {
+      draft.medicalScan.select = draft.medicalScan.options.map[action.name];
 
       // update discount range
-      const mb = draft.ui.medicalScanDetails.selectedMedicalBilling;
-      let discount = draft.ui.medicalScanDetails.discount;
+      const ms = draft.medicalScan.select;
+      let discount = draft.medicalScan.discount;
       if (discount < 0) {
         discount = 0;
-      } else if (discount > mb.maxDiscount) {
-        discount = mb.maxDiscount;
+      } else if (discount > ms.maxDiscount) {
+        discount = ms.maxDiscount;
       }
-      draft.ui.medicalScanDetails.discount = discount;
+      draft.medicalScan.discount = discount;
       break;
     }
 
-    case 'SET_MEDICAL_BILLING_DISCOUNT': {
-      const mb = draft.ui.medicalScanDetails.selectedMedicalBilling;
+    case 'SET_MEDICAL_SCAN_DISCOUNT': {
+      const ms = draft.medicalScan.select;
 
       // check discount range
       let discount = action.discount;
       if (discount < 0) {
         discount = 0;
-      } else if (discount > mb.maxDiscount) {
-        discount = mb.maxDiscount;
+      } else if (discount > ms.maxDiscount) {
+        discount = ms.maxDiscount;
       }
-      draft.ui.medicalScanDetails.discount = discount;
+      draft.medicalScan.discount = discount;
       break;
     }
 
-    case 'PUSH_MEDICAL_BILLING_SCAN': {
-      const { selectedMedicalBilling: mb, discount, scanList } = draft.ui.medicalScanDetails;
+    case 'PUSH_MEDICAL_SCAN': {
+      const { select: ms, discount, scanList } = draft.medicalScan;
       scanList.push({
-        name: mb.name,
-        amount: mb.amount,
+        name: ms.name,
+        amount: ms.amount,
         discount,
       });
       break;
     }
 
-    case 'DELETE_MEDICAL_BILLING_SCAN': {
-      const { scanList } = draft.ui.medicalScanDetails;
-      draft.ui.medicalScanDetails.scanList = [
+    case 'DELETE_MEDICAL_SCAN': {
+      const { scanList } = draft.medicalScan;
+      draft.medicalScan.scanList = [
         ...scanList.slice(0, action.index),
         ...scanList.slice(action.index + 1),
       ];

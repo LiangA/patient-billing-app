@@ -1,18 +1,18 @@
-export const selectMedicalBilling = (name) => ({
-  type: 'SELECT_MEDICAL_BILLING',
+export const selectMedicalScan = (name) => ({
+  type: 'SELECT_MEDICAL_SCAN',
   name,
 });
 
-export const setMedicalBillingDiscount = (discount) => ({
-  type: 'SET_MEDICAL_BILLING_DISCOUNT',
+export const setMedicalScanDiscount = (discount) => ({
+  type: 'SET_MEDICAL_SCAN_DISCOUNT',
   discount,
 });
 
-export const pushPatientBillingScan = () => ({
-  type: 'PUSH_MEDICAL_BILLING_SCAN',
+export const pushMedicalScan = () => ({
+  type: 'PUSH_MEDICAL_SCAN',
 });
 
-export const deletePatientBillingScan = (index) => ({
-  type: 'DELETE_MEDICAL_BILLING_SCAN',
+export const deleteMedicalScan = (index) => ({
+  type: 'DELETE_MEDICAL_SCAN',
   index,
 });

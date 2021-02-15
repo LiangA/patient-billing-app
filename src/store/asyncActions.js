@@ -1,7 +1,7 @@
 import * as MockAPI from '../mocks/api';
 
-export const fetchMedicalBillingList = async (dispatch) => {
-  dispatch({ type: 'LOADING_MEDICAL_BILLING_LIST' });
+export const fetchMedicalScanOptions = async (dispatch) => {
+  dispatch({ type: 'LOADING_MEDICAL_SCAN_OPTIONS' });
 
   const modalityList = await MockAPI.getModalityList();
   const modalityMap = new Map();
@@ -14,5 +14,5 @@ export const fetchMedicalBillingList = async (dispatch) => {
     medicalBilling.maxSlotPerDay = modalityMap.get(medicalBilling.modality);
   }
 
-  dispatch({ type: 'LOADED_MEDICAL_BILLING_LIST', list: medicalBillingList });
+  dispatch({ type: 'LOADED_MEDICAL_SCAN_OPTIONS', list: medicalBillingList });
 };
