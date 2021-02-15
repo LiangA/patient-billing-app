@@ -2,7 +2,7 @@ import './App.scss';
 
 import { Redirect, Route, Switch } from 'react-router-dom';
 
-import AddPatientBilling from './AddPatientBilling';
+import AddPatientAppointment from './AddPatientAppointment';
 import PatientBillingTransaction from './PatientBillingTransaction';
 import ViewAppointment from './ViewAppointment';
 import useInitApp from '../hooks/useInitApp';
@@ -14,7 +14,7 @@ const App = () => {
     <div id="patient-billing-app">
       <Switch>
         <Route path="/add">
-          <AddPatientBilling />
+          <AddPatientAppointment />
         </Route>
 
         <Route path="/transaction">

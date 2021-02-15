@@ -1,12 +1,12 @@
-import './AddPatientBilling.scss';
+import './AddPatientAppointment.scss';
 
 import { Link } from 'react-router-dom';
 import MedicalScanTable from './MedicalScanTable';
 import MedicalScanSearch from './MedicalScanSearch';
 
-const AddPatientBilling = () => {
+const AddPatientAppointment = () => {
   return (
-    <div className="add-patient-billing">
+    <div className="add-patient-appointment">
       <div className="patient-details">
         <h1>Patient Details</h1>
       </div>
@@ -24,4 +24,4 @@ const AddPatientBilling = () => {
   );
 };
 
-export default AddPatientBilling;
+export default AddPatientAppointment;
