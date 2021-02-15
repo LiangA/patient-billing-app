@@ -13,6 +13,7 @@ const defaultState = {
     medicalScanDetails: {
       selectedMedicalBilling: {},
       discount: 0,
+      scanList: [],
     },
   },
 };
@@ -72,6 +73,25 @@ const appReducer = produce((draft, action) => {
         discount = mb.maxDiscount;
       }
       draft.ui.medicalScanDetails.discount = discount;
+      break;
+    }
+
+    case 'PUSH_MEDICAL_BILLING_SCAN': {
+      const { selectedMedicalBilling: mb, discount, scanList } = draft.ui.medicalScanDetails;
+      scanList.push({
+        name: mb.name,
+        amount: mb.amount,
+        discount,
+      });
+      break;
+    }
+
+    case 'DELETE_MEDICAL_BILLING_SCAN': {
+      const { scanList } = draft.ui.medicalScanDetails;
+      draft.ui.medicalScanDetails.scanList = [
+        ...scanList.slice(0, action.index),
+        ...scanList.slice(action.index + 1),
+      ];
       break;
     }
   }

@@ -1,4 +1,7 @@
+import './AddPatientBilling.scss';
+
 import { Link } from 'react-router-dom';
+import MedicalScanTable from './MedicalScanTable';
 import PatientBillingSearchBar from './PatientBillingSearchBar';
 
 const AddPatientBilling = () => {
@@ -11,7 +14,7 @@ const AddPatientBilling = () => {
       <div className="medical-scan-details">
         <h1>Medical Scan Details</h1>
         <PatientBillingSearchBar />
-        <div className="list">Medical list</div>
+        <MedicalScanTable />
       </div>
 
       <Link to="/">Save</Link>

@@ -1,4 +1,8 @@
-import { selectMedicalBilling, setMedicalBillingDiscount } from '../store/actionCreators';
+import {
+  selectMedicalBilling,
+  setMedicalBillingDiscount,
+  pushPatientBillingScan,
+} from '../store/actionCreators';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Select from 'react-select';
@@ -34,6 +38,7 @@ const PatientBillingSearchBar = () => {
         <span className="label">Discount</span>
         <input
           type="number"
+          disabled={medicalBilling.isLoading}
           min="0"
           max={ui.selectedMedicalBilling.maxDiscount || 0}
           value={ui.discount || 0}
@@ -46,10 +51,8 @@ const PatientBillingSearchBar = () => {
 
       <button
         className="add-button"
-        onClick={() => {
-          // TODO: call api to update the medical list
-          console.log(ui);
-        }}
+        disabled={medicalBilling.isLoading}
+        onClick={() => dispatch(pushPatientBillingScan())}
       >
         Add
       </button>
