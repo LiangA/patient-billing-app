@@ -1,4 +1,8 @@
+import './PatientBillingTransaction.scss';
+
 import { Link, useParams } from 'react-router-dom';
+
+import TransactionTable from './TransactionTable';
 import { useSelector } from 'react-redux';
 
 const PatientBillingTransaction = () => {
@@ -28,6 +32,7 @@ const PatientBillingTransaction = () => {
         <div className="right">
           <div className="transaction-history">
             <h3>Previoud Transaction</h3>
+            <TransactionTable appointmentId={appointmentId} />
           </div>
         </div>
       </div>

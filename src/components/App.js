@@ -1,5 +1,3 @@
-import './App.scss';
-
 import { Redirect, Route, Switch } from 'react-router-dom';
 
 import AddPatientAppointment from './AddPatientAppointment';
