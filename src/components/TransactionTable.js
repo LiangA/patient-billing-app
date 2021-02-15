@@ -1,12 +1,4 @@
-import { useSelector } from 'react-redux';
-
-const TransactionHistory = ({ appointmentId }) => {
-  const appointment = useSelector((s) => s.appointment);
-  if (appointment.isLoading) {
-    return <div>Loading...</div>;
-  }
-
-  const paymentList = appointment.map[appointmentId].paymentList;
+const TransactionHistory = ({ paymentList }) => {
   if (paymentList.length === 0) {
     return (
       <div className="patient-billing-transaction-table">

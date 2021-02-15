@@ -5,12 +5,27 @@
 
     .left {
       flex-grow: 1;
-      border: 1px solid red;
 
       .billing-status {
         width: 100%;
-        height: 300px;
-        border: 1px solid red;
+        margin: 25px 0;
+
+        table {
+          width: 100%;
+          border-top: 1px solid black;
+          border-collapse: collapse;
+          text-align: left;
+
+          th,
+          td {
+            padding: 10px;
+            border-bottom: 1px solid lightgray;
+          }
+
+          th {
+            width: 200px;
+          }
+        }
       }
 
       .card {
@@ -23,25 +38,25 @@
     .right {
       margin-left: 20px;
       flex-grow: 1;
+
+      .patient-billing-transaction-table {
+        width: 100%;
+        margin: 25px 0;
+        border-collapse: collapse;
+        border-top: 1px solid black;
+        text-align: center;
+
+        th,
+        td {
+          padding: 16px;
+          border-bottom: 1px solid lightgray;
+        }
+
+        .empty {
+          padding: 10px 0;
+          color: blue;
+        }
+      }
     }
-  }
-}
-
-.patient-billing-transaction-table {
-  width: 100%;
-  margin: 25px 0;
-  border-collapse: collapse;
-  border-top: 1px solid black;
-  text-align: center;
-
-  th,
-  td {
-    padding: 16px;
-    border-bottom: 1px solid lightgray;
-  }
-
-  .empty {
-    padding: 10px 0;
-    color: blue;
   }
 }

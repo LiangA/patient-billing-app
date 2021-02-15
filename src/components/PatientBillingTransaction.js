@@ -2,13 +2,18 @@ import './PatientBillingTransaction.scss';
 
 import { Link, useParams } from 'react-router-dom';
 
+import BillingStatus from './BillingStatus';
 import TransactionTable from './TransactionTable';
 import { useSelector } from 'react-redux';
 
 const PatientBillingTransaction = () => {
   const { appointmentId } = useParams();
+  const isLoading = useSelector((s) => s.appointment.isLoading);
   const appointment = useSelector((s) => s.appointment.map[appointmentId]);
-  console.log({ appointment });
+
+  if (isLoading) {
+    return <div>Loading ...</div>;
+  }
 
   return (
     <div className="patient-billing-transaction">
@@ -17,10 +22,7 @@ const PatientBillingTransaction = () => {
 
       <div className="content">
         <div className="left">
-          <div className="billing-status">
-            <h3>Current Billing Status</h3>
-          </div>
-
+          <BillingStatus appointment={appointment} />
           <div>Payable Amount</div>
           <div>Payment Mode</div>
 
@@ -32,7 +34,7 @@ const PatientBillingTransaction = () => {
         <div className="right">
           <div className="transaction-history">
             <h3>Previoud Transaction</h3>
-            <TransactionTable appointmentId={appointmentId} />
+            <TransactionTable paymentList={appointment.paymentList} />
           </div>
         </div>
       </div>
