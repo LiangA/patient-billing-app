@@ -27,6 +27,39 @@ const db = {
     name: item[0],
     maxSlotPerDay: item[1],
   })),
+
+  appointmentList: [
+    {
+      id: 'ADY12004',
+      date: '2016-05-12',
+      patient: {
+        salutation: 'MR',
+        name: 'Hari Haran',
+        gender: 'Male',
+        dob: '1994-05-12',
+        age: 27,
+        ageType: 'Year',
+        phone: '8571234567',
+        address: '311 Arsenal St, Watertown, MA 02472',
+      },
+      medicalScanList: [
+        { name: 'MRI BRAIN', amount: 3000, discount: 300 },
+        { name: 'GLUCOSE FASTING', amount: 130, discount: 13 },
+      ],
+      paymentList: [
+        {
+          date: '2020-02-03',
+          paidAmount: 25,
+          mode: 'CARD',
+        },
+        {
+          date: '2020-02-06',
+          paidAmount: 105,
+          mode: 'CASH',
+        },
+      ],
+    },
+  ],
 };
 
 export default db;
