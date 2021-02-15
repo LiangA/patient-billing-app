@@ -1,17 +1,5 @@
+import defaultState from './defaultState';
 import produce from 'immer';
-
-const defaultState = {
-  medicalScan: {
-    options: {
-      isLoading: true,
-      list: [],
-      map: {},
-    },
-    select: {},
-    discount: 0,
-    scanList: [],
-  },
-};
 
 const appReducer = produce((draft, action) => {
   switch (action.type) {

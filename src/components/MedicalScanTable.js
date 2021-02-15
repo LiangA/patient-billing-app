@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { deleteMedicalScan } from '../store/actionCreators';
+import { deleteMedicalScan } from '../store/actions';
 
 const MedicalScanTable = () => {
   const dispatch = useDispatch();

@@ -5,8 +5,8 @@ import ReactDOM from 'react-dom';
 // Redux
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
-import appReducer from './store/appReducer';
-const store = createStore(appReducer);
+import reducer from './store/reducer';
+const store = createStore(reducer);
 
 ReactDOM.render(
   <BrowserRouter>

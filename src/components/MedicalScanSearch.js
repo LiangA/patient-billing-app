@@ -1,8 +1,4 @@
-import {
-  selectMedicalScan,
-  setMedicalScanDiscount,
-  pushMedicalScan,
-} from '../store/actionCreators';
+import { selectMedicalScan, setMedicalScanDiscount, pushMedicalScan } from '../store/actions';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Select from 'react-select';
