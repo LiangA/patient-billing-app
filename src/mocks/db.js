@@ -46,18 +46,7 @@ const db = {
         { name: 'GLUCOSE FASTING', amount: 300, discount: 10 },
         { name: 'MRI BRAIN', amount: 70, discount: 0 },
       ],
-      paymentList: [
-        {
-          date: '2020-02-03',
-          paidAmount: 25,
-          mode: 'CARD',
-        },
-        {
-          date: '2020-02-06',
-          paidAmount: 105,
-          mode: 'CASH',
-        },
-      ],
+      paymentList: [],
     },
   ],
 };

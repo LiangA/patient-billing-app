@@ -1,5 +1,7 @@
 import db from './db';
 import { delay } from '../utils';
+import moment from 'moment';
+import produce from 'immer';
 
 export const getMedicalBillingList = async () => {
   await delay(1000);
@@ -18,6 +20,22 @@ export const getAppointmentList = async () => {
 
 export const postAppointment = async (appointment) => {
   await delay(1000);
-  db.appointmentList.push(appointment);
+  db.appointmentList = produce(db.appointmentList, (appointmentList) => {
+    appointmentList.push(appointment);
+  });
   return;
+};
+
+export const postPayment = async (appointmentId, amount, mode) => {
+  db.appointmentList = produce(db.appointmentList, (appointmentList) => {
+    for (const ap of appointmentList) {
+      if (ap.id === appointmentId) {
+        ap.paymentList.push({
+          date: moment().format('YYYY-MM-DD'),
+          paidAmount: amount,
+          mode,
+        });
+      }
+    }
+  });
 };
