@@ -3,6 +3,23 @@ import produce from 'immer';
 
 const appReducer = produce((draft, action) => {
   switch (action.type) {
+    case 'LOADING_APPOINTMENT_LIST':
+      draft.appointment.isLoading = true;
+      draft.appointment.list = [];
+      draft.appointment.map = {};
+      break;
+
+    case 'LOADED_APPOINTMENT_LIST':
+      draft.appointment.isLoading = false;
+      draft.appointment.list = action.list;
+
+      const map = {};
+      for (const ap of action.list) {
+        map[ap.id] = ap;
+      }
+      draft.appointment.map = map;
+      break;
+
     case 'LOADING_MEDICAL_SCAN_OPTIONS':
       draft.medicalScan.options.isLoading = true;
       draft.medicalScan.options.list = [];

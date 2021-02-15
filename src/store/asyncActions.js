@@ -16,3 +16,9 @@ export const fetchMedicalScanOptions = async (dispatch) => {
 
   dispatch({ type: 'LOADED_MEDICAL_SCAN_OPTIONS', list: medicalBillingList });
 };
+
+export const fetchAppointmentList = async (dispatch) => {
+  dispatch({ type: 'LOADING_APPOINTMENT_LIST' });
+  const list = await MockAPI.getAppointmentList();
+  dispatch({ type: 'LOADED_APPOINTMENT_LIST', list });
+};
