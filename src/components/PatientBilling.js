@@ -1,17 +1,24 @@
 import './PatientBilling.scss';
 
+import * as MockAPI from '../mocks/api';
+
 import { Link, useParams } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import TransactionTable from './TransactionTable';
-import { useSelector } from 'react-redux';
+import { fetchAppointmentList } from '../store/asyncActions';
 import { useState } from 'react';
 
+const MAX_TRANSACTION_TIMES = 3;
+const MIN_PAY_PRECENTAGE = 20;
+
 const PatientBilling = () => {
+  const dispatch = useDispatch();
   const { appointmentId } = useParams();
   const isLoading = useSelector((s) => s.appointment.isLoading);
   const appointment = useSelector((s) => s.appointment.map[appointmentId]);
   const [payableAmount, setPayableAmount] = useState(0);
-  const [paymentMode, setPymentMode] = useState('CASH');
+  const [paymentMode, setPymentMode] = useState('CARD');
 
   if (isLoading) {
     return <div>Loading ...</div>;
@@ -22,6 +29,33 @@ const PatientBilling = () => {
   const totalDiscount = medicalScanList.reduce((sum, scan) => sum + scan.discount, 0);
   const totalPaidAmount = paymentList.reduce((sum, { paidAmount }) => sum + paidAmount, 0);
   const totalBalance = totalAmount - totalDiscount - totalPaidAmount;
+  const minPayAmount = ((totalAmount - totalDiscount) * MIN_PAY_PRECENTAGE) / 100;
+
+  const isLastPayment = paymentList.length === MAX_TRANSACTION_TIMES - 1;
+  const saveTransaction = async () => {
+    if (paymentMode === 'CARD') {
+      // TODO: validate the card fields should be required
+    }
+
+    if (isLastPayment && payableAmount !== totalBalance) {
+      alert(
+        `You can only do a maximum of ${MAX_TRANSACTION_TIMES} transactions. ` +
+          `You should settle the entire amount (${totalBalance} INR) in last transaction.`
+      );
+      return;
+    }
+
+    if (!isLastPayment && payableAmount < minPayAmount) {
+      alert(`patient should pay at least 20% (${minPayAmount} INR) of their total amount`);
+      return;
+    }
+
+    await MockAPI.postPayment(appointmentId, payableAmount, paymentMode);
+    await fetchAppointmentList(dispatch);
+
+    // reset
+    setPayableAmount(0);
+  };
 
   return (
     <div className="patient-billing">
@@ -69,34 +103,40 @@ const PatientBilling = () => {
           </div>
 
           {/* Payable Amount */}
-          <div className="payable-amount">
-            <span className="label">Payable Amount:</span>
-            <input
-              type="number"
-              value={payableAmount}
-              min="0"
-              max={totalBalance}
-              onChange={(e) => {
-                let amount = e.target.value;
-                if (amount < 0) amount = 0;
-                else if (amount > totalBalance) amount = totalBalance;
-
-                setPayableAmount(amount);
-              }}
-            />
-          </div>
+          {totalBalance !== 0 && (
+            <div className="payable-amount">
+              <span className="label">Payable Amount:</span>
+              <input
+                type="number"
+                value={payableAmount}
+                min={isLastPayment ? totalBalance : minPayAmount}
+                max={totalBalance}
+                onChange={(e) => {
+                  let amount = Number.parseInt(e.target.value, 10);
+                  if (amount < 0) {
+                    amount = 0;
+                  } else if (amount > totalBalance) {
+                    amount = totalBalance;
+                  }
+                  setPayableAmount(amount);
+                }}
+              />
+            </div>
+          )}
 
           {/* Payment Mode */}
-          <div className="payment-mode">
-            <span className="label">Payment Mode:</span>
-            <select value={paymentMode} onChange={(e) => setPymentMode(e.target.value)}>
-              <option value="CASH">Cash</option>
-              <option value="CARD">Card</option>
-            </select>
-          </div>
+          {totalBalance !== 0 && (
+            <div className="payment-mode">
+              <span className="label">Payment Mode:</span>
+              <select value={paymentMode} onChange={(e) => setPymentMode(e.target.value)}>
+                <option value="CARD">Card</option>
+                <option value="CASH">Cash</option>
+              </select>
+            </div>
+          )}
 
           {/* Card Mode */}
-          {paymentMode === 'CARD' && (
+          {totalBalance !== 0 && paymentMode === 'CARD' && (
             <div className="card">
               <input type="text" placeholder="Cardholder's Name" />
               <br />
@@ -110,7 +150,8 @@ const PatientBilling = () => {
             </div>
           )}
 
-          <button>Save</button>
+          {/* Save Button */}
+          {totalBalance !== 0 && <button onClick={saveTransaction}>Save</button>}
         </div>
 
         <div className="right">
