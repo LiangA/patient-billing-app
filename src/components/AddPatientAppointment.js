@@ -37,10 +37,22 @@ const AddPatientAppointment = () => {
   });
 
   const updateFormInputValue = (e) => {
-    setPatient({
-      ...patient,
-      [e.target.name]: e.target.value,
-    });
+    const { name, value } = e.target;
+    const updateValues = { [name]: value };
+
+    // salutation
+    if (name === 'salutation') {
+      if (value === 'MR') updateValues.gender = 'Male';
+      if (value === 'MS') updateValues.gender = 'Female';
+    }
+
+    // gender
+    if (name === 'gender') {
+      if (value === 'Male') updateValues.salutation = 'MR';
+      if (value === 'Female') updateValues.salutation = 'MS';
+    }
+
+    setPatient({ ...patient, ...updateValues });
   };
 
   const saveAppointment = async (e) => {
