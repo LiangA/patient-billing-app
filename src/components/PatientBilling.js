@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import TransactionTable from './TransactionTable';
 import { fetchAppointmentList } from '../store/asyncActions';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 
 const MAX_TRANSACTION_TIMES = 3;
 const MIN_PAY_PRECENTAGE = 20;
@@ -19,6 +19,7 @@ const PatientBilling = () => {
   const appointment = useSelector((s) => s.appointment.map[appointmentId]);
   const [payableAmount, setPayableAmount] = useState(0);
   const [paymentMode, setPymentMode] = useState('CARD');
+  const submitRef = useRef();
 
   if (isLoading) {
     return <div>Loading ...</div>;
@@ -32,10 +33,10 @@ const PatientBilling = () => {
   const minPayAmount = ((totalAmount - totalDiscount) * MIN_PAY_PRECENTAGE) / 100;
 
   const isLastPayment = paymentList.length === MAX_TRANSACTION_TIMES - 1;
-  const saveTransaction = async () => {
-    if (paymentMode === 'CARD') {
-      // TODO: validate the card fields should be required
-    }
+  const saveTransaction = async (e) => {
+    try {
+      e.preventDefault();
+    } catch (e) {}
 
     if (isLastPayment && payableAmount !== totalBalance) {
       alert(
@@ -137,21 +138,34 @@ const PatientBilling = () => {
 
           {/* Card Mode */}
           {totalBalance !== 0 && paymentMode === 'CARD' && (
-            <div className="card">
-              <input type="text" placeholder="Cardholder's Name" />
+            <form className="card" onSubmit={saveTransaction}>
+              <input type="text" placeholder="Cardholder's Name" required />
               <br />
-              <input type="text" placeholder="Card Number" />
+              <input type="text" placeholder="Card Number" required />
               <div className="expire">
                 <div>Expire</div>
-                <input type="text" placeholder="MM/YYYY" />
-                <input type="text" placeholder="CVC" />
+                <input type="text" placeholder="MM/YYYY" required />
+                <input type="text" placeholder="CVC" required />
                 <span>128-bit secured</span>
               </div>
-            </div>
+              <input ref={submitRef} style={{ visibility: 'hidden' }} type="submit" />
+            </form>
           )}
 
           {/* Save Button */}
-          {totalBalance !== 0 && <button onClick={saveTransaction}>Save</button>}
+          {totalBalance !== 0 && (
+            <button
+              onClick={() => {
+                if (paymentMode === 'CARD') {
+                  submitRef.current.click();
+                } else {
+                  saveTransaction();
+                }
+              }}
+            >
+              Save
+            </button>
+          )}
         </div>
 
         <div className="right">

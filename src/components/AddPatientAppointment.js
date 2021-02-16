@@ -237,7 +237,7 @@ const AddPatientAppointment = () => {
             </div>
           </div>
 
-          <input ref={submitRef} style={{ visibility: 'hidden' }} type="submit" value="Submit" />
+          <input ref={submitRef} style={{ visibility: 'hidden' }} type="submit" />
         </form>
       </div>
 
