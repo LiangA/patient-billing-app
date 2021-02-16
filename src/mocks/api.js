@@ -1,6 +1,7 @@
 import db from './db';
 import { delay } from '../utils';
 import moment from 'moment';
+import { nanoid } from 'nanoid';
 import produce from 'immer';
 
 export const getMedicalBillingList = async () => {
@@ -18,12 +19,18 @@ export const getAppointmentList = async () => {
   return db.appointmentList;
 };
 
-export const postAppointment = async (appointment) => {
-  await delay(1000);
+export const postAppointment = async (patient, medicalScanList) => {
+  const appointment = {
+    id: nanoid(8),
+    date: moment().format('YYYY-MM-DD'),
+    patient,
+    medicalScanList,
+    paymentList: [],
+  };
+
   db.appointmentList = produce(db.appointmentList, (appointmentList) => {
     appointmentList.push(appointment);
   });
-  return;
 };
 
 export const postPayment = async (appointmentId, amount, mode) => {

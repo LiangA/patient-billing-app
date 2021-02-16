@@ -93,6 +93,15 @@ const appReducer = produce((draft, action) => {
       ];
       break;
     }
+
+    case 'RESET_ADD_PATIENT_APPOINTMENT':
+      // TODO: reset patient
+
+      // reset medical scan
+      draft.medicalScan.select = {};
+      draft.medicalScan.discount = 0;
+      draft.medicalScan.scanList = [];
+      break;
   }
 
   return draft;

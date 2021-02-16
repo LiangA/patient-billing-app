@@ -9,7 +9,7 @@ const MedicalScanTable = () => {
   if (scanList.length === 0) {
     return (
       <div className="medical-scan-table">
-        <div className="empty">At least scan is required</div>
+        <div className="empty">At least one medical scan should be selected</div>
       </div>
     );
   }

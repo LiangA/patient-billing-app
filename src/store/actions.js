@@ -16,3 +16,7 @@ export const deleteMedicalScan = (index) => ({
   type: 'DELETE_MEDICAL_SCAN',
   index,
 });
+
+export const resetAddPatientAppointment = () => ({
+  type: 'RESET_ADD_PATIENT_APPOINTMENT',
+});
