@@ -8,7 +8,7 @@ const MedicalScanSearch = () => {
   const medicalScan = useSelector((s) => s.medicalScan);
 
   return (
-    <div className="medical-scan-details-search-bar">
+    <div className="medical-scan-details-search">
       <div>
         <span className="label">Scan List</span>
         <Select

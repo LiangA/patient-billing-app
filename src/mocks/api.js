@@ -20,16 +20,14 @@ export const getAppointmentList = async () => {
 };
 
 export const postAppointment = async (patient, medicalScanList) => {
-  const appointment = {
-    id: nanoid(8),
-    date: moment().format('YYYY-MM-DD'),
-    patient,
-    medicalScanList,
-    paymentList: [],
-  };
-
   db.appointmentList = produce(db.appointmentList, (appointmentList) => {
-    appointmentList.push(appointment);
+    appointmentList.push({
+      id: nanoid(8),
+      date: moment().format('YYYY-MM-DD'),
+      patient,
+      medicalScanList,
+      paymentList: [],
+    });
   });
 };
 

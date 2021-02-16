@@ -1,5 +1,6 @@
 import './ViewAppointment.scss';
 
+import AppointmentSearch from './AppointmentSearch';
 import AppointmentTable from './AppointmentTable';
 import { Link } from 'react-router-dom';
 
@@ -8,7 +9,7 @@ const ViewAppointment = () => {
     <div className="view-appointment">
       <h1>View Appointment</h1>
       <Link to="/add">New Appointment</Link>
-      <div className="search-bar">appointment search bar</div>
+      <AppointmentSearch />
       <AppointmentTable />
     </div>
   );
