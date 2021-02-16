@@ -1,3 +1,10 @@
+export const setAppointmentSearchCriteria = (fromDate, toDate, status) => ({
+  type: 'SET_APPOINTMENT_SEARCH_CRITERIA',
+  fromDate,
+  toDate,
+  status,
+});
+
 export const selectMedicalScan = (name) => ({
   type: 'SELECT_MEDICAL_SCAN',
   name,

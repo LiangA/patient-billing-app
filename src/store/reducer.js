@@ -3,6 +3,13 @@ import produce from 'immer';
 
 const appReducer = produce((draft, action) => {
   switch (action.type) {
+    case 'SET_APPOINTMENT_SEARCH_CRITERIA': {
+      draft.appointmentSearch.fromDate = action.fromDate;
+      draft.appointmentSearch.toDate = action.toDate;
+      draft.appointmentSearch.status = action.status;
+      break;
+    }
+
     case 'LOADING_APPOINTMENT_LIST':
       draft.appointment.isLoading = true;
       draft.appointment.list = [];

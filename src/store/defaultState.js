@@ -1,4 +1,10 @@
 const defaultState = {
+  appointmentSearch: {
+    fromDate: '',
+    toDate: '',
+    status: 'NOT_YET_BILLED',
+  },
+
   // View Appointment Page
   appointment: {
     isLoading: true,
