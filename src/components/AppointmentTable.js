@@ -30,7 +30,8 @@ const AppointmentTable = () => {
               <td>{ap.id}</td>
               <td>{ap.patient.name}</td>
               <td>
-                {ap.patient.age}-{ap.patient.gender}
+                {ap.patient.age}
+                {ap.patient.ageType}-{ap.patient.gender}
               </td>
               <td>{ap.date}</td>
               <td>0</td>

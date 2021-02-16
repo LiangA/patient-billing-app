@@ -38,7 +38,7 @@ const db = {
         gender: 'Male',
         dob: '1994-05-12',
         age: 27,
-        ageType: 'Year',
+        ageType: 'Y',
         phone: '8571234567',
         address: '311 Arsenal St, Watertown, MA 02472',
       },
