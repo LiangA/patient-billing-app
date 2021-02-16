@@ -25,11 +25,7 @@ const PatientBilling = () => {
     return <div>Loading ...</div>;
   }
 
-  const { medicalScanList, paymentList } = appointment;
-  const totalAmount = medicalScanList.reduce((sum, scan) => sum + scan.amount, 0);
-  const totalDiscount = medicalScanList.reduce((sum, scan) => sum + scan.discount, 0);
-  const totalPaidAmount = paymentList.reduce((sum, { paidAmount }) => sum + paidAmount, 0);
-  const totalBalance = totalAmount - totalDiscount - totalPaidAmount;
+  const { paymentList, totalAmount, totalDiscount, totalPaidAmount, totalBalance } = appointment;
   const minPayAmount = ((totalAmount - totalDiscount) * MIN_PAY_PRECENTAGE) / 100;
 
   const isLastPayment = paymentList.length === MAX_TRANSACTION_TIMES - 1;

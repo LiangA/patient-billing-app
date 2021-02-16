@@ -11,10 +11,22 @@ const appReducer = produce((draft, action) => {
 
     case 'LOADED_APPOINTMENT_LIST':
       draft.appointment.isLoading = false;
-      draft.appointment.list = action.list;
+      draft.appointment.list = action.list.map((ap) => {
+        const { medicalScanList, paymentList } = ap;
+        const totalAmount = medicalScanList.reduce((sum, scan) => sum + scan.amount, 0);
+        const totalDiscount = medicalScanList.reduce((sum, scan) => sum + scan.discount, 0);
+        const totalPaidAmount = paymentList.reduce((sum, { paidAmount }) => sum + paidAmount, 0);
+        return {
+          ...ap,
+          totalAmount,
+          totalDiscount,
+          totalPaidAmount,
+          totalBalance: totalAmount - totalDiscount - totalPaidAmount,
+        };
+      });
 
       const map = {};
-      for (const ap of action.list) {
+      for (const ap of draft.appointment.list) {
         map[ap.id] = ap;
       }
       draft.appointment.map = map;

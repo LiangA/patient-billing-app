@@ -1,5 +1,5 @@
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const AppointmentTable = () => {
   const appointment = useSelector((s) => s.appointment);
@@ -24,23 +24,32 @@ const AppointmentTable = () => {
         </tr>
       </thead>
       <tbody>
-        {appointment.list.map((ap) => {
-          return (
-            <tr key={ap.id}>
-              <td>{ap.id}</td>
-              <td>{ap.patient.name}</td>
-              <td>
-                {ap.patient.age}
-                {ap.patient.ageType}-{ap.patient.gender}
-              </td>
-              <td>{ap.date}</td>
-              <td>0</td>
-              <td>
-                <Link to={'/transaction/' + ap.id}>Click to Pay</Link>
-              </td>
-            </tr>
-          );
-        })}
+        {appointment.list.map((ap) => (
+          <tr key={ap.id}>
+            {/* 1. Appointment ID */}
+            <td>{ap.id}</td>
+
+            {/* 2. Patient Name */}
+            <td>{ap.patient.name}</td>
+
+            {/* 3. Age-Gender: 27Y-Male */}
+            <td>
+              {ap.patient.age}
+              {ap.patient.ageType}-{ap.patient.gender}
+            </td>
+
+            {/* 4. Appointment Date */}
+            <td>{ap.date}</td>
+
+            {/* 5. Balance Amount */}
+            <td>{ap.totalBalance}</td>
+
+            {/* 6. Action */}
+            <td>
+              <Link to={'/transaction/' + ap.id}>Click to Pay</Link>
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );
